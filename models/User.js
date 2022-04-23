@@ -1,8 +1,6 @@
-const { Schema, Types } = require('mongoose');
-const { Thought, User } = require('../models');
+const { Schema, model } = require('mongoose');
 
 // User schema
-
 const userSchema = new Schema(
     {
         username: {
@@ -37,7 +35,7 @@ const userSchema = new Schema(
         toJSON: {
             virtuals: true,
         },
-        id: false,
+
     }
 
 )
