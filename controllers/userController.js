@@ -28,7 +28,7 @@ module.exports = {
 
     // get single user
     getSingleUser(req, res) {
-        User.findOne({ _id: req.params.userId })
+        User.findOne({ _id: id })
             .select('-__v')
             .then(async (user) =>
                 !user
