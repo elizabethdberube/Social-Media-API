@@ -60,13 +60,13 @@ const thoughtSchema = new Schema({
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 
-// create a new instance
-Thought.create({ name: 'Reactions', reactions: reactionData }, (err, data) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log(data);
-    }
-});
+// // create a new instance
+// Thought.create({ name: 'Reactions', reactions: reactionData }, (err, data) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log(data);
+//     }
+// });
 
 module.exports = Thought; 
