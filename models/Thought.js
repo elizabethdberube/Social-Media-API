@@ -1,20 +1,26 @@
 const { Schema, Types } = require('mongoose');
+const mongoose = require('mongoose');
 
 // reaction schema
 const reactionSchema = new Schema({
     reactionId: {
-        type: mongoose.Schema.Types.ObjectId,
-        default: true,
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
     },
     reactionBody: {
         type: String,
-        required: true,
         maxlength: 280,
     },
     createdAt: {
         type: Date,
         default: Date.now,
     },
+    users: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
 },
     {
         toJSON: {
@@ -35,7 +41,6 @@ const reactionData = [
 const thoughtSchema = new Schema({
     thoughtText: {
         type: String,
-        required: true,
         maxlength: 280,
         minlength: 1,
     },

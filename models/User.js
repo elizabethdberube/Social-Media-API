@@ -20,6 +20,7 @@ const userSchema = new Schema(
                 unique: true,
             },
         },
+
         thoughts: [{
             type: Schema.Types.ObjectId,
             ref: 'Thought',
@@ -30,16 +31,16 @@ const userSchema = new Schema(
             ref: 'User',
         },
         ],
+
     },
     {
         toJSON: {
             virtuals: true,
         },
-
     }
-
 )
 
+// virtual
 userSchema.virtual('friendCount', {
     ref: 'User',
     localField: 'friends',
