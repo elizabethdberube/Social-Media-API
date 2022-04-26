@@ -15,12 +15,12 @@ const reactionSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    users: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-    ],
+    user:
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
+
 },
     {
         toJSON: {
@@ -31,11 +31,11 @@ const reactionSchema = new Schema({
     })
 
 // reaction data
-const reactionData = [
-    { reactionBody: 'yay!' },
-    { reactionBody: 'excited!' },
-    { reactionBody: 'so nice' },
-];
+// const reactionData = [
+//     { reactionBody: 'yay!' },
+//     { reactionBody: 'excited!' },
+//     { reactionBody: 'so nice' },
+// ];
 
 // thought schema
 const thoughtSchema = new Schema({
@@ -48,13 +48,21 @@ const thoughtSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+
+    reactions: [reactionSchema],
+
+    user:
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 },
     {
         toJSON: {
             getters: true,
         },
 
-        reactions: [reactionSchema],
+
     },
 )
 

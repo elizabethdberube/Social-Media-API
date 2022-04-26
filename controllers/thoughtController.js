@@ -25,11 +25,25 @@ module.exports = {
     // create a thought
     createThought(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
+            .then((thought) => {
+                User.findOneAndUpdate(
+                    { _id: req.body.user },
+                    { $push: { thoughts: thought._id } },
+
+                ).then((user) => {
+
+                    console.log(thought._id)
+                    console.log(user)
+
+                });
+                res.json(thought);
+            }
+            )
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
             });
+
     },
 
     // update a thought
@@ -55,7 +69,7 @@ module.exports = {
                     ? res.status(404).json({ message: 'No thought with that ID' })
                     : Thought.deleteMany({ _id: { $in: thought.users } })
             )
-            .then(() => res.json({ message: 'Thought and users deleted' }))
+            .then(() => res.json({ message: 'Thought deleted' }))
             .catch((err) => res.status(500).json(err));
     },
 
@@ -64,9 +78,10 @@ module.exports = {
         console.log('You added a reaction');
         console.log(req.body);
         Thought.findOneAndUpdate(
-            { _id: req.params.userID },
-            { $addToSet: { reactionBody: req.body } },
-            { runValidators: true, new: true }
+            { _id: req.params.thoughtId },
+            { $push: { reactions: { reactionBody: req.body.reactions, user: req.body.user } } },
+            { runValidators: true, new: true },
+
         )
             .then((thought) =>
                 !thought
@@ -80,8 +95,9 @@ module.exports = {
     // remove a reaction
     removeReaction(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.params.userId },
-            { $pull: { reactionId: { reactionId: req.params.reactionId } } },
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactions: req.params.reactionId } } },
+            console.log(req.params.reactionId)
         )
             .then((thought) =>
                 !thought

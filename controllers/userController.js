@@ -28,7 +28,7 @@ module.exports = {
 
     // get single user
     getSingleUser(req, res) {
-        User.findOne({ _id: id })
+        User.findOne({ _id: req.params.userId })
             .select('-__v')
             .then(async (user) =>
                 !user
@@ -37,7 +37,7 @@ module.exports = {
             )
             .catch((err) => {
                 console.log(err);
-                return res.statue(500).json(err);
+                return res.status(500).json(err);
             });
     },
 
@@ -51,11 +51,10 @@ module.exports = {
     // update user
     updateUser(req, res) {
         User.findOneAndUpdate(
-            { username: req.params.userId },
-            { email: req.params.userId },
-            { $pull: { username: req.params.userId } },
-            { $pull: { email: req.params.userId } },
-            { new: true }
+            { _id: req.params.userId },
+            { $set: { username: req.body.username, email: req.body.email } },
+            { new: true },
+            console.log(req)
         ).then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
@@ -66,10 +65,8 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No such user exists' })
-                    : Thought.findOneAndUpdate(
-                        { thoughtText: req.params.userId },
-                        { $pull: { thoughtText: req.params.userId } },
-                        { new: true }
+                    : Thought.deleteMany(
+                        { user: req.params.userId }
                     )
             ).then((user) =>
                 !user
@@ -90,7 +87,7 @@ module.exports = {
         console.log(req.body);
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $addToSet: { firends: req.body } },
+            { $push: { friends: req.body.friends } },
             { runValidators: true, new: true }
         )
             .then((user) =>
@@ -107,7 +104,7 @@ module.exports = {
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $pull: { friends: { friendsId: req.params.friendsId } } },
+            { $pull: { friends: req.params.friendId } },
         )
             .then((user) =>
                 !user
