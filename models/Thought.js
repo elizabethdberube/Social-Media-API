@@ -30,13 +30,6 @@ const reactionSchema = new Schema({
 
     })
 
-// reaction data
-// const reactionData = [
-//     { reactionBody: 'yay!' },
-//     { reactionBody: 'excited!' },
-//     { reactionBody: 'so nice' },
-// ];
-
 // thought schema
 const thoughtSchema = new Schema({
     thoughtText: {
@@ -68,13 +61,5 @@ const thoughtSchema = new Schema({
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 
-// // create a new instance
-// Thought.create({ name: 'Reactions', reactions: reactionData }, (err, data) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(data);
-//     }
-// });
 
 module.exports = Thought; 
