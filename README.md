@@ -39,7 +39,7 @@ Pull requests. Feel free to open a pull requst on my GitHub.
 
 ## Questions
 
-If you have nay questions about this project then you can contact me directly at 
+If you have any questions about this project then you can contact me directly at 
 
 elizabethdberube@gmail.com
 
