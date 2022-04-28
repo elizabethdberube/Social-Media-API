@@ -79,11 +79,12 @@ module.exports = {
         console.log(req.body);
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $push: { reactions: { reactionBody: req.body.reactions, user: req.body.user } } },
+            { $push: { reactions: { reactionBody: req.body.reactionBody, user: req.body.user } } },
             { runValidators: true, new: true },
 
         )
             .then((thought) =>
+
                 !thought
                     ? res.status(404)
                         .json({ message: 'no thought with that ID' })
@@ -97,7 +98,7 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactions: req.params.reactionId } } },
-            console.log(req.params.reactionId)
+
         )
             .then((thought) =>
                 !thought
