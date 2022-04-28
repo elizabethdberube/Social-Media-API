@@ -51,7 +51,7 @@ elizabethdberube@gmail.com
 
 [GitHub Repo](https://github.com/elizabethdberube/Social-Media-API) 
 
-[Deployed Application](https://drive.google.com/file/d/1LjW2U0BVJcXlh0TBmabHZSSntgI-P40S/view) 
+[Demo Video](https://drive.google.com/file/d/1LjW2U0BVJcXlh0TBmabHZSSntgI-P40S/view) 
 
 
 ----
